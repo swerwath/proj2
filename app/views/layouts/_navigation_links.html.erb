@@ -1,7 +1,8 @@
-<% if trainer_signed_in? %>
-  <li><%= link_to 'My Account', edit_trainer_registration_path %></li>
-  <li><%= link_to 'Log Out', destroy_trainer_session_path, :method=>'delete' %></li>
+<%# add navigation links to this file %>
+<% if user_signed_in? %>
+  <li><%= link_to 'My Account', edit_user_registration_path %></li>
+  <li><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
-  <li><%= link_to 'Log In', new_trainer_session_path %></li>
-  <li><%= link_to 'Join', new_trainer_registration_path %></li>
+  <li><%= link_to 'Log In', new_user_session_path %></li>
+  <li><%= link_to 'Join', new_user_registration_path %></li>
 <% end %>
