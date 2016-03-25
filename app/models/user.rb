@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def clubs:
+    #TODO: Fill in this method, returns list of clubs the user is in
+  end
 end

@@ -8,5 +8,11 @@
 
 # Make Clubs
 %w(Service Sports CS).each do |name|
-  Club.create name: name, description: name+" Club"
+  c = Club.create name: name, description: name+" Club"
+  t = Team.create name: "general", description: "General discussion for "+name, leader_id: rand(1..4)
+  t.club = c
+end
+
+%w(John Cathy Will ).each do |name|
+  User.create name: name, email: name+"@gmail.com", password: 'password'
 end

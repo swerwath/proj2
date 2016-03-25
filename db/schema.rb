@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322023833) do
+ActiveRecord::Schema.define(version: 20160325025205) do
 
   create_table "clubs", force: :cascade do |t|
     t.string   "name"
@@ -35,8 +35,7 @@ ActiveRecord::Schema.define(version: 20160322023833) do
     t.integer "user_id"
   end
 
-  add_index "teams_users", ["team_id"], name: "index_teams_users_on_team_id"
-  add_index "teams_users", ["user_id"], name: "index_teams_users_on_user_id"
+  add_index "teams_users", ["team_id", "user_id"], name: "index_teams_users_on_team_id_and_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160322023833) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
