@@ -9,10 +9,13 @@
 # Make Clubs
 %w(Service Sports CS).each do |name|
   c = Club.create name: name, description: name+" Club"
-  t = Team.create name: "general", description: "General discussion for "+name, leader_id: rand(1..4)
+  t = Team.create name: "general", description: "General discussion for "+name, leader_id: c.id
   t.club = c
+  t.save
 end
 
-%w(John Cathy Will ).each do |name|
-  User.create name: name, email: name+"@gmail.com", password: 'password'
+%w(John Cathy Will Jill).each do |name|
+  u = User.create name: name, email: name+"@gmail.com", password: 'password'
+  t = Team.find_by_id(u.id)
+  u.teams.append(t)
 end
