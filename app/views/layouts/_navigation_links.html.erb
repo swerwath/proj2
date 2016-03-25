@@ -1,5 +1,6 @@
 <%# add navigation links to this file %>
 <% if user_signed_in? %>
+  <li><%= render 'layouts/clubs_dropdowns' %></li>
   <li><%= link_to 'My Account', edit_user_registration_path %></li>
   <li><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>

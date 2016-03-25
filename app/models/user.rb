@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   def clubs
     c = Array.new
-    self.teams do |t|
+    self.teams.each do |t|
       if t.name == "general"
         c.append(t.club)
       end
