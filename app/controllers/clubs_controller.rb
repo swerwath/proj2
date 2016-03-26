@@ -15,10 +15,8 @@ class ClubsController < ApplicationController
       general_team = Team.where(club_id: club.id, name: "general")
       current_user.teams.append(general_team)
       redirect_to "/clubs/#{club.id}"
-    end
     else
       redirect_to root_path
     end
   end
-
 end
