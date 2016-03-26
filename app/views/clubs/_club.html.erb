@@ -1,1 +1,3 @@
-<td><%= link_to club.name, club %></td>
+<td><%= button_to "Join", join_path(id: club), :class => "button medium", :method => :patch %></td>
+<td><%= link_to club.name, club %> </ br></td>
+<td><i><%= club.description %></i></td>
