@@ -1,7 +1,7 @@
 class TeamJoinRequestsController < ApplicationController
   def create
     TeamJoinRequest.create user_id: current_user.id, team_id: params[:id]
-    redirect_to root
+    redirect_to :root
   end
 
   def approve
@@ -15,6 +15,7 @@ class TeamJoinRequestsController < ApplicationController
   def destroy
     request = TeamJoinRequest.find(params[:id])
     request.destroy
+    redirect_to :root
   end
 
 end
