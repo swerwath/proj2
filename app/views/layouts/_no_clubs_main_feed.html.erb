@@ -8,7 +8,7 @@
       <div class="column">
         <table class="table">
           <tbody>
-            <% Club.where(closed: false).all.each do |club| %>
+            <% Club.all.each do |club| %>
               <tr><%= render club %></tr>
             <% end %>
           </tbody>

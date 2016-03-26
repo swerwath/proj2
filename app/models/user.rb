@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :announcements
   belongs_to :team
 
+  has_many :team_join_requests
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
