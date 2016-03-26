@@ -8,7 +8,7 @@
 
 # Make Clubs
 %w(Service Sports CS).each do |name|
-  c = Club.create name: name, description: name+" Club"
+  c = Club.create name: name, description: name+" Club", closed: false
   t = Team.create name: "general", description: "General discussion for "+name, leader_id: c.id
   t.club = c
   t.save
