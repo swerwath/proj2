@@ -6,7 +6,7 @@ class Team < ActiveRecord::Base
 
   has_many :team_join_requests
 
-  def feed(start=0, end=self.announcements.size)
-    self.announcements[start...end]
+  def feed(start_index=0, end_index=self.announcements.size)
+    return self.announcements[start_index...end_index]
   end
 end
