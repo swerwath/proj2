@@ -1,12 +1,12 @@
 <% gen_team_id = Team.where(club_id: club.id, name: "general").first.id %>
 <% if club.closed %>
   <% if TeamJoinRequest.where(user_id: current_user.id, team_id: gen_team_id).size == 0 %>
-    <td><%= button_to "Request", request_to_join_path(id: gen_team_id), :class => "button medium", :method => :patch %></td>
+    <td><%= button_to "Request", request_to_join_path(id: gen_team_id), :class => "btn btn-default", :method => :patch %></td>
   <% else %>
-  <td><%= button_to "Retract Request", retract_request_path(id: TeamJoinRequest.where(team_id: gen_team_id, user_id: current_user).first.id), :class => "button medium", :method => :patch %></td>
+  <td><%= button_to "Retract Request", retract_request_path(id: TeamJoinRequest.where(team_id: gen_team_id, user_id: current_user).first.id), :class => "btn btn-default", :method => :patch %></td>
   <% end %>
 <% else %>
-  <td><%= button_to "Join", join_path(id: club), :class => "button medium", :method => :patch %></td>
+  <td><%= button_to "Join", join_path(id: club), :class => "btn btn-default", :method => :patch %></td>
 <% end %>
 <td><%= link_to club.name, club %> </ br></td>
 <td><i><%= club.description %></i></td>
