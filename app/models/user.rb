@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def teams_led
+    return Team.where(leader_id: self.id).all
+  end
+
   def clubs
     c = Array.new
     self.teams.each do |t|
