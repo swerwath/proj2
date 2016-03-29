@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= announcement.title %></h3>
+  </div>
+  <% if announcement.content != nil %>
+    <div class="panel-body">
+      <%= announcement.content %>
+    </div>
+  <% end %>
+
+  <div class="panel-footer">
+    <% if announcement.comments.size > 0 %>
+        <ul class="list-group">
+          <% announcement.comments.each do |c| %>
+            <li class="list-group-item"><%= render c %></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <%= simple_form_for(@comment, url: comments_path, method: 'post', html: {class: 'form-inline' }) do |f| %>
+      <%= f.hidden_field :announcement_id, value: announcement.id %>
+      <%= f.input :content, placeholder: 'Leave a comment...', label: false %>
+    <% end %>
+  </div>
+
+</div>

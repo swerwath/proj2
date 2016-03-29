@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %> <br />
+  <small><%= @team.description %></small></h1>
+</div>
+
+<% @team.feed.each do |a| %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3"><%= render a %></div>
+  </div>
+<% end %>

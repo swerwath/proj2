@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_filter :initialize_comment
+
+  def initialize_comment
+    @comment = Comment.new
+  end
 
   protected
 

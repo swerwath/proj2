@@ -5,10 +5,9 @@
   <ul class="dropdown-menu">
     <% teams_managed.each do |t| %>
       <% num_join_requests = t.team_join_requests.size %>
-
       <li>
         <%= link_to [:edit, t] do %>
-          <%= t.club.name.downcase+"."+t.name %> 
+          <%= t.club.name.downcase+"."+t.name %>
           <% if num_join_requests > 0 %>
             <span class="badge"><%= num_join_requests %></span>
           <% end %>
