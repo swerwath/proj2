@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     return Team.where(leader_id: self.id).all
   end
 
+  def is_in_club?(c)
+    return self.clubs.include? c
+  end
+
   def clubs
     c = Array.new
     self.teams.each do |t|

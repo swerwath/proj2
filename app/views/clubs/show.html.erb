@@ -1,1 +1,20 @@
-<h1><%= @club.name %></h1>
+<% if not current_user.is_in_club? @club %>
+  <div class="jumbotron">
+    <h1>You're not in <%= @club.name %>!</h1>
+    <% if @club.closed %>
+      <% gen_team_id = Team.where(club_id: @club.id, name: "general").first.id %>
+      <% if TeamJoinRequest.where(user_id: current_user.id, team_id: gen_team_id).size == 0 %>
+        <p>The club leader has chosen to make it private, but you're free to request access</p>
+        <p><%= button_to "Request Access", request_to_join_path(id: gen_team_id), :class => "btn btn-lg btn-primary", :method => :patch %></p>
+      <% else %>
+        <p>Having second thoughts? Retract your join request at any time</p>
+        <p><%= button_to "Retract Request", retract_request_path(id: TeamJoinRequest.where(team_id: gen_team_id, user_id: current_user).first.id), :class => "btn btn-lg btn-warning", :method => :patch %></p>
+      <% end %>
+    <% else %>
+      <p>Luckily for you, it's open.</p>
+      <p><%= button_to "Join "+@club.name, join_path(id: @club), :class => "btn btn-lg btn-success", :method => :patch %></p>
+    <% end %>
+  </div>
+<% else %>
+  <h1><%= @club.name %></h1>
+<% end %>

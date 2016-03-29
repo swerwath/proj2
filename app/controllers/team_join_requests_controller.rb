@@ -1,7 +1,8 @@
 class TeamJoinRequestsController < ApplicationController
   def create
+    session[:return_to] = request.referer
     TeamJoinRequest.create user_id: current_user.id, team_id: params[:id]
-    redirect_to :root
+    redirect_to session.delete(:return_to)
   end
 
   def approve
@@ -15,9 +16,10 @@ class TeamJoinRequestsController < ApplicationController
   end
 
   def destroy
+    session[:return_to] = request.referer
     request = TeamJoinRequest.find(params[:id])
     request.destroy
-    redirect_to :root
+    redirect_to session.delete(:return_to)
   end
 
 end
