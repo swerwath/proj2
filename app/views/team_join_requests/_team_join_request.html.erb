@@ -1,0 +1,7 @@
+<li class="list-group-item">
+  <%= team_join_request.user.name %>
+  <span class="pull-right">
+    <%= button_to "Approve", approve_path(id: team_join_request), :class => "btn btn-success btn-xs", :method => :patch %>
+    <%= button_to "Deny", destroy_path(id: team_join_request), :class => "btn btn-danger btn-xs", :method => :patch %>
+  </span>
+</li>

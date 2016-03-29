@@ -11,7 +11,7 @@ class TeamJoinRequestsController < ApplicationController
     team_to_join = request.team
     user.teams.append(team_to_join)
     announce_title = user.name+" has joined "+team_to_join.club.name+"."+team_to_join.name
-    join_announcement = Announcement.create(team_id: team_to_join.id, user_id: user.id, email_blast: false, itle: announce_title)
+    join_announcement = Announcement.create(team_id: team_to_join.id, user_id: user.id, email_blast: false, title: announce_title)
     request.destroy
   end
 
