@@ -1,11 +1,10 @@
 <div class="home-no-clubs-message">
-  <h1>Looks like haven't joined any clubs!</h1>
-  <h3>Have a club leader add you to get started!</h3>
-  <br />
-  <div class="container">
+  <div class="page-header">
+    <h1>Looks like haven't joined any clubs! <br />
+    <small>Check out these clubs</small></h1>
+  </div>
     <div class="row">
-      <h3>Or, check out these clubs: </h3>
-      <div class="column">
+      <div class="col-md-6 col-md-offset-3">
         <table class="table">
           <tbody>
             <% Club.all.each do |club| %>
@@ -14,6 +13,5 @@
           </tbody>
         </table>
       </div>
-    </div>
   </div>
 </div>

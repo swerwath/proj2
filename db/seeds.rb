@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Make Clubs
-%w(Service Sports CS).each do |name|
+%w(Service Sports Computers).each do |name|
   c = Club.create name: name, description: name+" Club", closed: false
   t = Team.create name: "general", description: "General discussion for "+name, leader_id: c.id, closed: false
   t2 = Team.create name: "fundraising", description: "Fundraising is fun(d)!", leader_id: c.id, closed: false

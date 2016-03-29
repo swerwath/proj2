@@ -35,14 +35,14 @@
       <div class="panel-body">
         <ul class="list-group">
           <% @team.users.each do |u| %>
-            <% if u != current_user %>
             <li class="list-group-item">
               <%= u.name %>
-              <span class="pull-right">
-                <%= button_to "Remove", remove_user_path(team_id: @team.id, user_id: u.id), :class => "btn btn-danger btn-xs", :method => :patch %>
-              </span>
+              <% if u != current_user %>
+                <span class="pull-right">
+                  <%= button_to "Remove", remove_user_path(team_id: @team.id, user_id: u.id), :class => "btn btn-danger btn-xs", :method => :patch %>
+                </span>
+              <% end %>
             </li>
-            <% end %>
           <% end %>
         </ul>
       </div>
