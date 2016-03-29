@@ -1,5 +1,4 @@
 class Team < ActiveRecord::Base
-  belongs_to :user
   belongs_to :club
   has_many :announcements
   has_and_belongs_to_many :users
@@ -9,4 +8,9 @@ class Team < ActiveRecord::Base
   def feed(start_index=0, end_index=self.announcements.size)
     return self.announcements.reverse[start_index...end_index]
   end
+
+  def leader
+    return User.find self.leader_id
+  end
+
 end

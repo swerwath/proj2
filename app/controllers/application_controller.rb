@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :initialize_comment
+  before_filter :initialize_announcement
 
   def initialize_comment
     @comment = Comment.new
+  end
+  def initialize_announcement
+    @announcement = Announcement.new
   end
 
   protected

@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329063722) do
+ActiveRecord::Schema.define(version: 20160329184446) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.integer  "user_id"
     t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "email_blast"
   end
 
   create_table "clubs", force: :cascade do |t|

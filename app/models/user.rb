@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :teams
   has_many :comments
   has_many :announcements
-  belongs_to :team
 
   has_many :team_join_requests
 

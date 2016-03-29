@@ -4,6 +4,26 @@
     <small><%= @team.description %></small></h1>
   </div>
 
+  <% if @team.leader_id == current_user.id or (@team.name == "general" and @team.club.officers.include? current_user) %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+          <%= simple_form_for(@announcement, url: announcements_path, method: 'post') do |f| %>
+            <%= f.hidden_field :team_id, value: @team.id %>
+            <div class="panel-body">
+              <%= f.input :title, placeholder: "Announcement Title", label: false %>
+              <%= f.input :content, placeholder: "Write an announcement...", as: :text, input_html: {rows: 8}, label: false %>
+              <%= f.input :email_blast, label: 'Send out email?', value: false %>
+            </div>
+            <div class="panel-footer">
+              <%= f.button :submit, "Announce" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <% @team.feed.each do |a| %>
     <div class="row">
       <div class="col-md-6 col-md-offset-3"><%= render a %></div>
