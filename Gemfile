@@ -29,6 +29,10 @@ gem 'devise'
 
 gem 'simple_form'
 
+#For Markdown supporte
+gem 'redcarpet'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -12,7 +12,7 @@
             <%= f.hidden_field :team_id, value: @team.id %>
             <div class="panel-body">
               <%= f.input :title, placeholder: "Announcement Title", label: false %>
-              <%= f.input :content, placeholder: "Write an announcement...", as: :text, input_html: {rows: 8}, label: false %>
+              <%= f.input :content, placeholder: "Write an announcement (in Markdown!)...", as: :text, input_html: {rows: 8}, label: false %>
               <%= f.input :email_blast, label: 'Send out email?', value: false %>
             </div>
             <div class="panel-footer">

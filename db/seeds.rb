@@ -19,8 +19,9 @@ end
 
 %w(John Cathy Will Jill).each do |name|
   u = User.create name: name, email: name+"@gmail.com", password: 'password'
-  t = Team.find_by_id(u.id)
-  t2 = Team.find_by_id(u.id + 1)
+  t = Team.find_by_id((u.id - 1) * 2 + 1)
+  t2 = Team.find_by_id(t.id + 1)
   u.teams.append(t)
   u.teams.append(t2)
+  u.save
 end

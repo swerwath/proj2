@@ -4,7 +4,8 @@
   </div>
   <% if announcement.content != nil %>
     <div class="panel-body">
-      <%= announcement.content %>
+      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, no_intra_emphasis: true, autolink: true, superscript: true) %>
+      <%= markdown.render(announcement.content).html_safe %>
     </div>
   <% end %>
 
