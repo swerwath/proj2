@@ -29,7 +29,7 @@ gem 'devise'
 
 gem 'simple_form'
 
-#For Markdown supporte
+#For Markdown support
 gem 'redcarpet'
 
 
