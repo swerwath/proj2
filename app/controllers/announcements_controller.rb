@@ -9,4 +9,13 @@ class AnnouncementsController < ApplicationController
     end
     redirect_to session.delete(:return_to)
   end
+
+  def destroy
+    session[:return_to] = request.referer
+    a = Announcement.find(params[:id])
+    if a.user == current_user
+      a.delete
+    end
+    redirect_to session.delete(:return_to)
+  end
 end

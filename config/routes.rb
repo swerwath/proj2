@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
+  patch 'destroy_announcement/:id', to: 'announcements#destroy', as: 'destroy_announcement'
+
   patch 'join/:id', to: 'clubs#join', as: 'join'
   patch 'join_team/:id', to: 'teams#join', as: 'join_team'
   patch 'approve/:id', to: 'team_join_requests#approve', as: 'approve'
