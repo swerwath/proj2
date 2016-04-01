@@ -30,7 +30,7 @@ gem 'devise'
 gem 'simple_form'
 
 #For Markdown support
-gem 'redcarpet'
+gem 'redcarpet_yt'
 
 
 # Use ActiveModel has_secure_password

@@ -7,7 +7,7 @@
   </div>
   <% if announcement.content != nil %>
     <div class="panel-body">
-      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true, tables: true, disable_indented_code_blocks: true, no_intra_emphasis: true, autolink: true, superscript: true) %>
+      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTMLwithYouTube, fenced_code_blocks: true, tables: true, disable_indented_code_blocks: true, no_intra_emphasis: true, autolink: true, superscript: true) %>
       <%= markdown.render(announcement.content).html_safe %>
     </div>
   <% end %>
