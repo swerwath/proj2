@@ -5,7 +5,15 @@
       <li><%= link_to '.all', c %></li>
       <li role="separator" class="divider"></li>
       <% c.teams.each do |t| %>
-        <li><%= link_to "."+t.name, t %></li>
+        <% if current_user.teams.include? t %>
+          <li><%= link_to "."+t.name, t %></li>
+        <% end %>
+      <% end %>
+      <li role="separator" class="divider"></li>
+      <% c.teams.each do |t| %>
+        <% if not current_user.teams.include? t %>
+          <li><%= link_to "."+t.name, t %></li>
+        <% end %>
       <% end %>
     </ul>
   </li>
