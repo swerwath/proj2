@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   patch 'destroy_announcement/:id', to: 'announcements#destroy', as: 'destroy_announcement'
+  patch 'destroy_comment/:id', to: 'comments#destroy', as: 'destroy_comment'
 
   patch 'join/:id', to: 'clubs#join', as: 'join'
   patch 'join_team/:id', to: 'teams#join', as: 'join_team'

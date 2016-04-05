@@ -1,1 +1,8 @@
 <b><%= comment.user.name %></b> <%= comment.content %>
+<% if comment.user == current_user or comment.announcement.user == announcement.user %>
+  <span class="pull-right">
+    <%= button_to destroy_comment_path(id: comment.id), class: "close", method: :patch do %>
+      <span aria-hidden="true">&times;</span>
+    <% end %>
+  </span>
+<% end %>
