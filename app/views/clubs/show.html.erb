@@ -1,4 +1,14 @@
-<% if not current_user.is_in_club? @club %>
+<% if current_user.is_in_club? @club %>
+  <div class="page-header">
+    <h1><%= @club.name %><br />
+    <small><%= @club.description %></small></h1>
+    <% current_user.club_feed(@club.id).each do |a| %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3"><%= render a %></div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
   <div class="jumbotron">
     <h1>You're not in <%= @club.name %>!</h1>
     <% if @club.closed %>
@@ -15,6 +25,5 @@
       <p><%= button_to "Join "+@club.name, join_path(id: @club), :class => "btn btn-lg btn-success", :method => :patch %></p>
     <% end %>
   </div>
-<% else %>
-  <h1><%= @club.name %></h1>
+
 <% end %>
