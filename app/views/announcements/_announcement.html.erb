@@ -1,7 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= button_to destroy_announcement_path(id: announcement.id), class: "close", method: :patch do %>
-      <span aria-hidden="true">&times;</span>
+    <% if announcement.user == current_user %>
+      <%= button_to destroy_announcement_path(id: announcement.id), class: "close", method: :patch do %>
+        <span aria-hidden="true">&times;</span>
+      <% end %>
     <% end %>
     <h3 class="panel-title"><%= announcement.title %></h3>
   </div>

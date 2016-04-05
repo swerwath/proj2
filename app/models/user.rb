@@ -31,14 +31,31 @@ class User < ActiveRecord::Base
   def club_feed(club_id)
     club = Club.find(club_id)
     club_feed = []
+    
     club.teams.each do |t|
       if t.club == club
         club_feed.concat t.feed
       end
     end
+
     sorted_feed = club_feed.sort_by do |announcement|
       announcement.created_at
     end
+
+    sorted_feed.reverse
+  end
+
+  def feed
+    raw_feed = []
+
+    self.clubs.each do |c|
+      raw_feed.concat self.club_feed (c.id)
+    end
+
+    sorted_feed = raw_feed.sort_by do |announcement|
+      announcement.created_at
+    end
+
     sorted_feed.reverse
   end
 
