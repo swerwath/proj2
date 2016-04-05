@@ -8,4 +8,9 @@ class Club < ActiveRecord::Base
     end
     return officers
   end
+
+  def feed
+    return []
+  end
+  
 end
