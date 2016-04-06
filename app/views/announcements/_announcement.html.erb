@@ -1,5 +1,8 @@
 <div class="panel panel-default">
   <div class="panel-heading">
+    <%= link_to announcement.team.club.name, announcement.team.club %>.<%= link_to announcement.team.name, announcement.team %>
+  </div>
+  <div class="panel-heading">
     <% if announcement.user == current_user %>
       <%= button_to destroy_announcement_path(id: announcement.id), class: "close", method: :patch do %>
         <span aria-hidden="true">&times;</span>

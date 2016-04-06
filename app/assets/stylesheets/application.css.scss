@@ -16,6 +16,22 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+.row {
+  background-color: transparent;
+}
+
+main {
+  //background-size: cover;
+  //background-image:url("bg.jpg");
+  //background-attachment:fixed;
+}
+
+.page-header {
+  margin: 0px 0 20px;
+  width: 100%;
+  border-bottom: 0px;
+}
+
 .home-no-clubs-message {
   float: center
 }
