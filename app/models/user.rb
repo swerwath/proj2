@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   def club_feed(club_id)
     club = Club.find(club_id)
     club_feed = []
-    
+
     club.teams.each do |t|
       if t.club == club
         club_feed.concat t.feed
