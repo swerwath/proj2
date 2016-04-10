@@ -6,6 +6,7 @@ class TeamJoinRequestsController < ApplicationController
   end
 
   def approve
+    session[:return_to] = request.referer
     request = TeamJoinRequest.find(params[:id])
     user = request.user
     team_to_join = request.team
@@ -13,6 +14,7 @@ class TeamJoinRequestsController < ApplicationController
     announce_title = user.name+" has joined "+team_to_join.club.name+"."+team_to_join.name
     join_announcement = Announcement.create(team_id: team_to_join.id, user_id: user.id, email_blast: false, title: announce_title)
     request.destroy
+    redirect_to session.delete(:return_to)
   end
 
   def destroy

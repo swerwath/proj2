@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
+  get 'teams/new', to: 'teams#new', as: 'create_team'
+
   patch 'destroy_announcement/:id', to: 'announcements#destroy', as: 'destroy_announcement'
   patch 'destroy_comment/:id', to: 'comments#destroy', as: 'destroy_comment'
 

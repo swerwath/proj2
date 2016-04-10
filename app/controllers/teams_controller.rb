@@ -23,14 +23,35 @@ class TeamsController < ApplicationController
     redirect_to session.delete(:return_to)
   end
 
-  def join
-    team = Team.find(params[:id])
-    if not team.closed and current_user.clubs.include? team.club
-      current_user.teams.append(team)
-      announce_title = current_user.name+" has joined "+team.club.name+"."+team.name
-      join_announcement = Announcement.create(team_id: team.id, user_id: current_user.id, email_blast: false, title: announce_title)
+  def new
+    @team = Team.new
+    @club_id = params[:club_id]
+  end
+
+  def create
+    @team = Team.new
+    @team.name = params[:team][:name]
+    @team.description = params[:team][:description]
+    @team.closed = params[:team][:closed]
+    @team.club = Club.find(params[:team][:club_id])
+    @team.leaders.append(current_user)
+    @team.users.append(current_user)
+    if @team.save
+      redirect_to @team
+    else
+      flash[:error] = @team.errors.full_messages.to_sentence
+      redirect_to new_team_path
     end
-    redirect_to "/teams/#{team.id}"
+  end
+
+  def join
+    @team = Team.find(params[:id])
+    if not @team.closed and current_user.clubs.include? @team.club
+      current_user.teams.append(team)
+      announce_title = current_user.name+" has joined "+@team.club.name+"."+@team.name
+      join_announcement = Announcement.create(team_id: @team.id, user_id: current_user.id, email_blast: false, title: announce_title)
+    end
+    redirect_to "/teams/#{@steam.id}"
   end
 
 end

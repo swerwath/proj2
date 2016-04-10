@@ -15,6 +15,9 @@
           <li><%= link_to "."+t.name, t %></li>
         <% end %>
       <% end %>
+      <% if c.officers.include? current_user %>
+        <li><%= link_to "Create new team", create_team_path(:club_id => c.id), :method => :get %></li>
+      <% end %>
     </ul>
   </li>
 <% end %>
