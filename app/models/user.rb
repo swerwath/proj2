@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :club_officers
   has_many :officerships, :through => :club_officers, :source => :club
 
+  has_many :club_presidents
+  has_many :presidentships, :through => :club_presidents, :source => :club
 
   has_and_belongs_to_many :teams
   has_many :comments
