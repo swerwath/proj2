@@ -3,7 +3,6 @@
     <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %> <br />
     <small><%= @team.description %></small></h1>
   </div>
-
   <% if @team.leader_id == current_user.id or (@team.name == "general" and @team.club.officers.include? current_user) %>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -23,7 +22,6 @@
       </div>
     </div>
   <% end %>
-
   <% @team.feed.each do |a| %>
     <div class="row">
       <div class="col-md-6 col-md-offset-3"><%= render a %></div>
