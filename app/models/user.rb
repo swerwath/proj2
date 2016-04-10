@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :team_leaders
+  has_many :led_teams, :through => :team_leaders, :source => :team
+
+
   has_and_belongs_to_many :teams
   has_many :comments
   has_many :announcements
@@ -9,10 +13,6 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  def teams_led
-    return Team.where(leader_id: self.id).all
-  end
 
   def is_in_club?(c)
     return self.clubs.include? c

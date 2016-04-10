@@ -9,7 +9,7 @@
 # Make Clubs
 %w(Service Sports Computers Debate).each do |name|
   c = Club.create name: name, description: name+" Club", closed: false
-  t = Team.create name: "general", description: "General discussion for "+name, leader_id: c.id, closed: false
+  t = Team.create name: "general", description: "General discussion for "+name, closed: false
   t2 = Team.create name: "fundraising", description: "Fundraising is fun(d)!", leader_id: c.id, closed: (rand(2) == 1)
   t.club = c
   t2.club = c
@@ -23,5 +23,7 @@ end
   t2 = Team.find_by_id(t.id + 1)
   u.teams.append(t)
   u.teams.append(t2)
+  t.leaders.append(u)
+  t2.leaders.append(u)
   u.save
 end
