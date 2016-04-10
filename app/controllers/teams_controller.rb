@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.find(params[:id])
-    if current_user != @team.leader
+    if not @team.leaders.include? current_user
       redirect_to @team
     end
   end
