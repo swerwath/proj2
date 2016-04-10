@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   patch 'approve/:id', to: 'team_join_requests#approve', as: 'approve'
   patch 'destroy/:id', to: 'team_join_requests#destroy', as: 'destroy'
   patch 'remove_user/:id', to: 'teams#remove_user', as: 'remove_user'
+  patch 'promote_user/:id', to: 'teams#promote_user', as: 'promote_user'
   patch 'request_to_join/:id', to: 'team_join_requests#create', as: 'request_to_join'
   patch 'retract_request/:id', to: 'team_join_requests#destroy', as: 'retract_request'
 

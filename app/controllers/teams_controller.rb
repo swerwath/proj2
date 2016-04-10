@@ -23,6 +23,16 @@ class TeamsController < ApplicationController
     redirect_to session.delete(:return_to)
   end
 
+  def promote_user
+    session[:return_to] = request.referer
+    @team = Team.find(params[:team_id])
+    if @team.leaders.include? current_user
+      @user = User.find(params[:user_id])
+      @team.leaders.append @user
+    end
+    redirect_to session.delete(:return_to)
+  end
+
   def new
     @team = Team.new
     @club_id = params[:club_id]

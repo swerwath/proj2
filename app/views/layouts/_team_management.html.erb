@@ -32,9 +32,14 @@
         <% @team.users.each do |u| %>
           <li class="list-group-item">
             <%= u.name %>
-            <% if u != current_user %>
+            <% if @team.leaders.include? u %>
+              <span class = "pull-right">Leader</span>
+            <% else %>
               <span class="pull-right">
                 <%= button_to "Remove", remove_user_path(team_id: @team.id, user_id: u.id), :class => "btn btn-danger btn-xs", :method => :patch %>
+              </span>
+              <span class="pull-right">
+                <%= button_to "Promote", promote_user_path(team_id: @team.id, user_id: u.id), :class => "btn btn-success btn-xs", :method => :patch %>
               </span>
             <% end %>
           </li>
