@@ -37,6 +37,8 @@ class TeamsController < ApplicationController
     @team.leaders.append(current_user)
     @team.users.append(current_user)
     if @team.save
+      create_title = current_user.name+" created "+@team.club.name+"."+@team.name
+      create_announcement = Announcement.create team_id: @team.id, user_id: current_user.id, email_blast: false, title: create_title
       redirect_to @team
     else
       flash[:error] = @team.errors.full_messages.to_sentence
@@ -49,7 +51,7 @@ class TeamsController < ApplicationController
     if not @team.closed and current_user.clubs.include? @team.club
       current_user.teams.append(team)
       announce_title = current_user.name+" has joined "+@team.club.name+"."+@team.name
-      join_announcement = Announcement.create(team_id: @team.id, user_id: current_user.id, email_blast: false, title: announce_title)
+      join_announcement = Announcement.create team_id: @team.id, user_id: current_user.id, email_blast: false, title: announce_title
     end
     redirect_to "/teams/#{@steam.id}"
   end
