@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :team_leaders
   has_many :led_teams, :through => :team_leaders, :source => :team
 
+  has_many :club_officers
+  has_many :officerships, :through => :club_officers, :source => :club
+
 
   has_and_belongs_to_many :teams
   has_many :comments

@@ -1,11 +1,5 @@
 class Club < ActiveRecord::Base
   has_many :teams
-
-  def officers
-    officers = []
-    self.teams.each do |t|
-      officers.append t.leader
-    end
-    return officers
-  end
+  has_many :club_officers
+  has_many :officers, :through => :club_officers, :source => :user
 end
