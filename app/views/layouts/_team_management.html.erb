@@ -8,7 +8,7 @@
       <span class="badge"><%= @team.team_join_requests.size %></span>
     </h4>
   </div>
-  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+  <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
     <div class="panel-body">
       <ul class="list-group">
         <% @team.team_join_requests.each do |tjr| %>
@@ -26,7 +26,7 @@
       </a>
     </h4>
   </div>
-  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+  <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
     <div class="panel-body">
       <ul class="list-group">
         <% @team.users.each do |u| %>
