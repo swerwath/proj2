@@ -30,6 +30,18 @@
     <%= f.submit 'Update', :class => 'button right' %>
   <% end %>
 </div>
+
+<div class="authform">
+  <h3>Leave Teams</h3>
+  <% teams = current_user.teams.sort_by do |t| %>
+    <% t.club.name %>
+  <% end %>
+  <% teams.each do |t| %>
+    <% tname = "#{t.club.name}.#{t.name}"%>
+    <%= button_to "Leave #{tname}" %>
+  <% end %>
+</div>
+
 <div class="authform">
 <h3>Cancel Account</h3>
 <p>Unhappy? We'll be sad to see you go.</p>
