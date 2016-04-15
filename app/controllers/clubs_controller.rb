@@ -6,7 +6,7 @@ class ClubsController < ApplicationController
   end
 
   def show
-    @club = Club.find(params[:id])
+    @club = Club.find params[:id]
   end
 
   def join
