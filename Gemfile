@@ -29,8 +29,11 @@ gem 'devise'
 
 gem 'simple_form'
 
-#For Markdown support
+# For Markdown support
 gem 'redcarpet_yt'
+
+# For email blasts
+gem 'mailchimp-api', require: 'mailchimp'
 
 
 # Use ActiveModel has_secure_password
