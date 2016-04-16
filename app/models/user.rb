@@ -38,8 +38,8 @@ class User < ActiveRecord::Base
     club_feed = []
 
     club.teams.each do |t|
-      if t.club == club
-        club_feed.concat t.feed
+      if t.users.include? self
+        club_feed += t.feed
       end
     end
 
@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
     raw_feed = []
 
     self.clubs.each do |c|
-      raw_feed.concat self.club_feed (c.id)
+      raw_feed += self.club_feed (c.id)
     end
 
     sorted_feed = raw_feed.sort_by do |announcement|
