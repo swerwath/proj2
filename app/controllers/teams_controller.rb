@@ -33,6 +33,16 @@ class TeamsController < ApplicationController
     redirect_to session.delete(:return_to)
   end
 
+  def add_user_to_team
+    session[:return_to] = request.referer
+    @team = Team.find(params[:team_id])
+    if @team.leaders.include? current_user
+      @user = User.find(params[:user_id])
+      @team.users.append @user
+    end
+    redirect_to session.delete(:return_to)
+  end
+
   def new
     @team = Team.new
     @club_id = params[:club_id]
