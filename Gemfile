@@ -34,7 +34,7 @@ gem 'simple_form'
 gem 'redcarpet_yt'
 
 # For email blasts
-# gem 'mailchimp-api', require: 'mailchimp'
+gem 'mailchimp-api', require: 'mailchimp'
 
 gem 'rails_12factor', group: :production
 
