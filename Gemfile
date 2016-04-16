@@ -4,8 +4,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgresql for production
+gem 'pg'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -33,7 +34,9 @@ gem 'simple_form'
 gem 'redcarpet_yt'
 
 # For email blasts
-gem 'mailchimp-api', require: 'mailchimp'
+# gem 'mailchimp-api', require: 'mailchimp'
+
+gem 'rails_12factor', group: :production
 
 
 # Use ActiveModel has_secure_password
@@ -53,7 +56,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
+  # Use sqlite3 as the database for Active Record
   gem 'rails_layout'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
