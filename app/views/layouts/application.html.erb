@@ -10,11 +10,13 @@
   </head>
   <body>
     <header>
-      <%= render 'layouts/navigation/navigation' %>
     </header>
     <main role="main">
        <%= render 'layouts/messages' %>
-       <%= yield %>
+       <div class="index-wrapper">
+         <%= render 'layouts/navigation/sidebar' %>
+         <%= yield %>
+       </div>
     </main>
   </body>
 </html>

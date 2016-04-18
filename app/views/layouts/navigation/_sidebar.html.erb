@@ -1,0 +1,49 @@
+<% if user_signed_in? %>
+  <div class="container">
+      <div class="profile">
+  			<div class="profile-sidebar">
+  				<!-- SIDEBAR USERPIC -->
+  				<div class="profile-userpic">
+  					<img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+  				</div>
+  				<!-- END SIDEBAR USERPIC -->
+  				<!-- SIDEBAR USER TITLE -->
+  				<div class="profile-usertitle">
+  					<div class="profile-usertitle-name">
+  						<%= current_user.name %>
+  					</div>
+  				</div>
+  				<!-- END SIDEBAR USER TITLE -->
+  				<!-- SIDEBAR MENU -->
+  				<div class="profile-usermenu">
+  					<ul class="nav">
+  						<li>
+  							<%= link_to root_url do %>
+                  <i class="glyphicon glyphicon-home"></i>
+                  Main Feed
+                <% end %>
+  						</li>
+              <%= render 'layouts/navigation/navigation_clubs_links' %>
+  					</ul>
+  				</div>
+          <div class="profile-usermenu profile-optionmenu">
+            <ul class="nav">
+              <li>
+                <%= link_to edit_user_registration_path do %>
+                  <i class="glyphicon glyphicon-cog"></i>
+                  Settings
+                <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_user_session_path, :method=>'delete' do %>
+                  <i class="glyphicon glyphicon-log-out"></i>
+                  Logout
+                <% end %>
+              </li>
+            </ul>
+          </div>
+  				<!-- END MENU -->
+  			</div>
+  		</div>
+  	</div>
+<% end %>

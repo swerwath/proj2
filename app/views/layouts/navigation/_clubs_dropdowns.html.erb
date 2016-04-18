@@ -3,13 +3,11 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= c.name %> <span class="caret"></span></a>
     <ul class="dropdown-menu">
       <li><%= link_to '.all', c %></li>
-      <li role="separator" class="divider"></li>
       <% c.teams.each do |t| %>
         <% if current_user.teams.include? t %>
           <li><%= link_to "."+t.name, t %></li>
         <% end %>
       <% end %>
-      <li role="separator" class="divider"></li>
       <% c.teams.each do |t| %>
         <% if not current_user.teams.include? t %>
           <li><%= link_to "."+t.name, t %></li>
