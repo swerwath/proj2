@@ -30,9 +30,17 @@
 //.navbar li { color: #000 }
 
 .page-header {
-  margin: 0px 0 20px;
+  margin: auto;
   width: 100%;
   border-bottom: 0px;
+  float: right;
+  position: relative;
+  left: -50%; /* or right 50% */
+}
+
+.page-header > h1 {
+  position: relative;
+  left: 50%;
 }
 
 .home-no-clubs-message {
