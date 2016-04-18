@@ -69,11 +69,11 @@ class TeamsController < ApplicationController
   def join
     @team = Team.find(params[:id])
     if not @team.closed and current_user.clubs.include? @team.club
-      current_user.teams.append(team)
+      current_user.teams.append(@team)
       announce_title = current_user.name+" has joined "+@team.club.name+"."+@team.name
       join_announcement = Announcement.create team_id: @team.id, user_id: current_user.id, email_blast: false, title: announce_title
     end
-    redirect_to "/teams/#{@steam.id}"
+    redirect_to "/teams/#{@team.id}"
   end
 
 end
