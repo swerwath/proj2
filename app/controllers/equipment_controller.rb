@@ -44,4 +44,29 @@ class EquipmentController < ApplicationController
     redirect_to session.delete(:return_to)
   end
 
+  def checkout
+    session[:return_to] = request.referer
+    @e = Equipment.find params[:id]
+    if @e.checked_out?
+      flash[:error] = "That's already checked out!"
+    elsif not @e.team.users.include? current_user
+      flash[:error] = "Only team members can checkout equipment!"
+    else
+      @e.user = current_user
+      @e.save
+    end
+    redirect_to session.delete(:return_to)
+  end
+
+  def return
+    @e = Equipment.find params[:id]
+    session[:return_to] = request.referer
+      if not @e.user == current_user
+        flash[:error] = "You can't return something you don't own!"
+      else
+        @e.user_id = nil
+        @e.save
+      end
+    redirect_to session.delete(:return_to)
+  end
 end

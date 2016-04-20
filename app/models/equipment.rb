@@ -8,8 +8,4 @@ class Equipment < ActiveRecord::Base
   def checked_out?
     not self.user.nil?
   end
-
-  def create
-  end
-
 end
