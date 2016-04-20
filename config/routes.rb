@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :announcements
   resources :comments
+  resources :equipment
 
   root to: "home#index"
 

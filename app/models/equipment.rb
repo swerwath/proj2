@@ -5,4 +5,8 @@ class Equipment < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
 
+  def checked_out?
+    not self.user.nil?
+  end
+
 end
