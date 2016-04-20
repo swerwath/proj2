@@ -170,6 +170,15 @@
   min-height: 460px;
 }
 
-.form-inline div { 
+.form-inline div {
   display: inline-block
+}
+
+.wrench {
+  opacity: 0;
+  color: black;
+}
+
+.wrench:hover {
+  opacity: 1;
 }
