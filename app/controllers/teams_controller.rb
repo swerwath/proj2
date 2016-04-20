@@ -1,4 +1,10 @@
 class TeamsController < ApplicationController
+  before_filter :initialize_equipment
+
+  def initialize_equipment
+    @equipment = Equipment.new
+  end
+
   def show
     @team = Team.find(params[:id])
 

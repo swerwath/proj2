@@ -18,6 +18,7 @@
 
 .row {
   background-color: transparent;
+  margin-top: 20px;
 }
 
 //.navbar {
@@ -167,4 +168,8 @@
   padding: 20px;
   background: #fff;
   min-height: 460px;
+}
+
+.form-inline div { 
+  display: inline-block
 }

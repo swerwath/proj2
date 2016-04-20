@@ -5,11 +5,15 @@ Rails.application.routes.draw do
   resources :teams
   resources :announcements
   resources :comments
+  resources :equipment
 
   root to: "home#index"
 
   get 'teams/new', to: 'teams#new', as: 'create_team'
   get 'landing', to: 'home#landing', as: 'landing'
+
+  patch 'equipment_checkout/:id', to: 'equipment#checkout', as: 'equipment_checkout'
+  patch 'equipment_return/:id', to: 'equipment#return', as: 'equipment_return'
 
   patch 'destroy_announcement/:id', to: 'announcements#destroy', as: 'destroy_announcement'
   patch 'destroy_comment/:id', to: 'comments#destroy', as: 'destroy_comment'
