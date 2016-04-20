@@ -1,5 +1,27 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingZero">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+          Team Info
+        </a>
+      </h4>
+    </div>
+    <div id="collapseZero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZero">
+      <div class="panel-body">
+        <%= simple_form_for(@team, url: team_path, method: 'patch') do |f| %>
+          <% if @team.name == "general" %>
+            <%= f.input :name, disabled: true, placeholder: "Name", label: false %>
+          <% else %>
+            <%= f.input :name, placeholder: "Name", label: false %>
+          <% end %>
+          <%= f.input :description, placeholder: "description", as: :text, input_html: {rows: 7}, label: false %>
+          <%= f.button :submit, "Update" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
