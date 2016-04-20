@@ -83,28 +83,38 @@
   </div>
   <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
     <div class="panel-body">
-      <table class="table table-striped">
-        <thead>
-          <th>Name</th>
-          <th>Condition</th>
-          <th>Owner</th>
-          <th></th>
-        </thead>
-        <tbody>
-          <% @team.equipment.each do |e| %>
-            <tr>
-              <td><%= e.name %></td>
-              <td><%= e.condition %></td>
-              <% if e.checked_out? %>
-                <td><%= e.user.name %></td>
-              <% else %>
-                <td>N/A</td>
-              <% end %>
-              <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal<%= e.id %>">Edit</button></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <% unless @team.equipment.empty? %>
+        <table class="table table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Condition</th>
+            <th>Owner</th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @team.equipment.each do |e| %>
+              <tr>
+                <td><%= e.name %></td>
+                <td><%= e.condition %></td>
+                <% if e.checked_out? %>
+                  <td><%= e.user.name %></td>
+                <% else %>
+                  <td>N/A</td>
+                <% end %>
+                <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal<%= e.id %>">Edit</button></td>
+                <td><%= button_to "Delete", e, :method=>:delete, :class=>"btn btn-danger btn-xs" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <%= simple_form_for(@equipment, html: {class: 'form-inline' }) do |f| %>
+      <%= f.hidden_field :team_id, value: @team.id %>
+      <%= f.input :name, placeholder: 'Name', label: false %>
+      <%= f.input :condition, placeholder: 'Condition', label: false %>
+      <%= f.button :submit, "Create" %>
+    <% end %>
     </div>
   </div>
 </div>

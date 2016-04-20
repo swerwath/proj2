@@ -9,4 +9,7 @@ class Equipment < ActiveRecord::Base
     not self.user.nil?
   end
 
+  def create
+  end
+
 end
