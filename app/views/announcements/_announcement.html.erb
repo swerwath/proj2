@@ -5,7 +5,7 @@
         <span aria-hidden="true">&times;</span>
       <% end %>
     <% end %>
-    <%= link_to announcement.team.club.name, announcement.team.club %>.<%= link_to announcement.team.name, announcement.team %>
+    <%= link_to announcement.team.club.name.titleize, announcement.team.club %> within <%= link_to announcement.team.name, announcement.team %>
   </div>
   <div class="panel-heading">
     <h3 class="panel-title"><%= announcement.title %></h3>

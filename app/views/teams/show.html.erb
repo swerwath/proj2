@@ -1,6 +1,6 @@
 <% if current_user.teams.include? @team %>
   <div class="page-header">
-    <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %> <br />
+    <h1><%= @team.name.titleize %> within <%= link_to @team.club.name, @team.club %> <br />
     <small><%= @team.description %></small></h1>
   </div>
   <% if @team.leaders.include? current_user or (@team.name == "general" and @team.club.officers.include? current_user) %>
@@ -29,7 +29,7 @@
   <% end %>
 <% else %>
 <div class="jumbotron">
-  <h1>You're not in <%= link_to @team.club.name, @team.club %>.<%= @team.name %>!</h1>
+  <h1>You're not in <%= @team.name.titleize %> within <%= link_to @team.club.name, @team.club %>!</h1>
   <% if @team.closed %>
     <% if TeamJoinRequest.where(user_id: current_user.id, team_id: @team.id).size == 0 %>
       <p>The team leader has chosen to make it private, but you're free to request access</p>
