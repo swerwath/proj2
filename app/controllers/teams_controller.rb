@@ -5,6 +5,17 @@ class TeamsController < ApplicationController
     @equipment = Equipment.new
   end
 
+  def destroy
+    session[:return_to] = request.referer
+    @team = Team.find params[:id]
+    if @team.club.president.include? current_user
+      @team.delete
+    else
+      flash[:error] = "Only club presidents can do that!"
+    end
+    redirect_to session.delete(:return_to)
+  end
+
   def show
     @team = Team.find(params[:id])
 
