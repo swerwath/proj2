@@ -26,6 +26,11 @@ Rails.application.routes.draw do
   patch 'remove_user/:id', to: 'teams#remove_user', as: 'remove_user'
   patch 'promote_user/:id', to: 'teams#promote_user', as: 'promote_user'
 
+  patch 'remove_club_user/:id', to: 'clubs#remove_user', as: 'remove_user_club'
+  patch 'promote_club_user/:id', to: 'clubs#promote_user', as: 'promote_user_club'
+  patch 'demote_club_user/:id', to: 'clubs#demote_user', as: 'demote_user_club'
+  patch 'transfer_presidency/:id', to: 'clubs#transfer_presidency', as: 'transfer_presidency'
+
   patch 'add_user_to_team/:id', to: 'teams#add_user_to_team', as: 'add_user_to_team'
 
   patch 'request_to_join/:id', to: 'team_join_requests#create', as: 'request_to_join'

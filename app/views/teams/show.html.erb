@@ -1,6 +1,10 @@
 <% if current_user.teams.include? @team %>
   <div class="page-header">
-    <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %> <br />
+    <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %>
+    <% if @team.leaders.include? current_user %>
+      <a data-toggle="modal" data-target="#team-manage-modal"><span class="glyphicon glyphicon-wrench wrench"></span></a>
+    <% end %>
+    <br />
     <small><%= @team.description %></small></h1>
   </div>
   <div class="row">
@@ -76,4 +80,22 @@
     <p><%= button_to "Join "+@team.name, join_team_path(id: @team), :class => "btn btn-lg btn-success", :method => :patch %></p>
   <% end %>
 </div>
+<% end %>
+
+<% if @team.leaders.include? current_user %>
+  <!-- Modal for team management -->
+  <div id="team-manage-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Managing <%= @team.club.name%>.<%= @team.name %></h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'layouts/team_management' %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

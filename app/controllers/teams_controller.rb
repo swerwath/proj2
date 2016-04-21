@@ -5,6 +5,17 @@ class TeamsController < ApplicationController
     @equipment = Equipment.new
   end
 
+  def destroy
+    session[:return_to] = request.referer
+    @team = Team.find params[:id]
+    if @team.club.president.include? current_user
+      @team.delete
+    else
+      flash[:error] = "Only club presidents can do that!"
+    end
+    redirect_to session.delete(:return_to)
+  end
+
   def show
     @team = Team.find(params[:id])
 
@@ -14,11 +25,22 @@ class TeamsController < ApplicationController
     end
   end
 
-  def edit
-    @team = Team.find(params[:id])
-    if not @team.leaders.include? current_user
-      redirect_to @team
+  def update
+    session[:return_to] = request.referer
+    @team_params = params[:team]
+    @team = Team.find params[:id]
+    if @team.leaders.include? current_user
+      @team.name = @team_params[:name]
+      @team.description = @team_params[:description]
+
+      unless @team.save
+        flash[:error] = @team.errors.full_messages.to_sentence
+      end
+    else
+      flash[:error] = "Only team leaders can do that!"
     end
+
+    redirect_to session.delete(:return_to)
   end
 
   def remove_user

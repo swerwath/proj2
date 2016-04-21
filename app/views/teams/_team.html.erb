@@ -1,0 +1,8 @@
+<li class="list-group-item">
+  <%= team.name %>
+  <% if team.club.presidents.include? current_user %>
+    <span class="pull-right">
+      <%= button_to "Delete", team, :method=>:delete, :class=>"btn btn-danger btn-xs" %>
+    </span>
+  <% end %>
+</li>
