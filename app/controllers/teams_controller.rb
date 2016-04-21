@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
   def destroy
     session[:return_to] = request.referer
     @team = Team.find params[:id]
-    if @team.club.president.include? current_user
+    if @team.club.presidents.include? current_user
       @team.delete
     else
       flash[:error] = "Only club presidents can do that!"
