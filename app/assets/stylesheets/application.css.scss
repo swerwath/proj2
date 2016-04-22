@@ -18,6 +18,7 @@
 
 .row {
   background-color: transparent;
+  margin-top: 20px;
 }
 
 //.navbar {
@@ -167,7 +168,6 @@
   min-height: 460px;
 }
 
-
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -308,4 +308,17 @@
         position: relative;
         margin-right: 0;
     }
+}
+
+.form-inline div {
+  display: inline-block
+}
+
+.wrench {
+  opacity: 0;
+  color: black;
+}
+
+.wrench:hover {
+  opacity: 1;
 }

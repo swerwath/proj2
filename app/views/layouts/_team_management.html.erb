@@ -1,5 +1,27 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingZero">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+          Team Info
+        </a>
+      </h4>
+    </div>
+    <div id="collapseZero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZero">
+      <div class="panel-body">
+        <%= simple_form_for(@team, url: team_path, method: 'patch') do |f| %>
+          <% if @team.name == "general" %>
+            <%= f.input :name, disabled: true, placeholder: "Name", label: false %>
+          <% else %>
+            <%= f.input :name, placeholder: "Name", label: false %>
+          <% end %>
+          <%= f.input :description, placeholder: "description", as: :text, input_html: {rows: 7}, label: false %>
+          <%= f.button :submit, "Update" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -52,7 +74,7 @@
   <div class="panel-heading" role="tab" id="headingThree">
     <h4 class="panel-title">
       <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Add Members
+        Add Members from <%= @team.club.name %>
       </a>
     </h4>
   </div>
@@ -63,13 +85,90 @@
           <% unless @team.users.include? u %>
             <li class="list-group-item">
               <%= u.name %>
-                <span class="pull-right">
-                  <%= button_to "Add", add_user_to_team_path(team_id: @team.id, user_id: u.id), :class => "btn btn-success btn-xs", :method => :patch %>
-                </span>
-              <% end %>
+              <span class="pull-right">
+                <%= button_to "Add", add_user_to_team_path(team_id: @team.id, user_id: u.id), :class => "btn btn-success btn-xs", :method => :patch %>
+              </span>
             </li>
           <% end %>
+        <% end %>
       </ul>
     </div>
   </div>
 </div>
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingFour">
+    <h4 class="panel-title">
+      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        Equipment
+      </a>
+    </h4>
+  </div>
+  <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+    <div class="panel-body">
+      <% unless @team.equipment.empty? %>
+        <table class="table table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Condition</th>
+            <th>Owner</th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @team.equipment.each do |e| %>
+              <tr>
+                <td><%= e.name %></td>
+                <td><%= e.condition %></td>
+                <% if e.checked_out? %>
+                  <td><%= e.user.name %></td>
+                <% else %>
+                  <td>N/A</td>
+                <% end %>
+                <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal<%= e.id %>">Edit</button></td>
+                <td><%= button_to "Delete", e, :method=>:delete, :class=>"btn btn-danger btn-xs" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <%= simple_form_for(@equipment, html: {class: 'form-inline' }) do |f| %>
+      <%= f.hidden_field :team_id, value: @team.id %>
+      <%= f.input :name, placeholder: 'Name', label: false %>
+      <%= f.input :condition, placeholder: 'Condition', label: false %>
+      <%= f.button :submit, "Create" %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Equipment Modals -->
+<% @team.equipment.each do |e| %>
+<!-- Modal -->
+<div id="modal<%= e.id %>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editing <%= e.name %></h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(e, url: equipment_path, method: 'patch') do |f| %>
+          <%= f.hidden_field :equipment_id, value: e.id %>
+          <div class="panel-body">
+            <%= f.input :name, placeholder: "Name", label: false %>
+            <%= f.input :condition, placeholder: "Condition", label: false %>
+            <% if e.checked_out? %>
+              <%= f.input :user_id,  as: :radio_buttons, label: "Revoke ownership from #{e.user.name}", value: false %>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <%= f.button :submit, "Update" %>
+        <% end %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
