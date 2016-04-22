@@ -2,17 +2,11 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="page-header">
-<<<<<<< HEAD
-        <% namp = @club.name.split(' ', 2) %>
-        <%= namp = namp[1] %>
-        <h1><%= namp %><br/>
-=======
         <h1><%= @club.name %>
         <% if @club.officers.include? current_user %>
           <a data-toggle="modal" data-target="#club-manage-modal"><span class="glyphicon glyphicon-wrench wrench"></span></a>
         <% end %>
         <br />
->>>>>>> master
         <small><%= @club.description %></small></h1>
       </div>
     </div>

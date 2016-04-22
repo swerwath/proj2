@@ -1,14 +1,10 @@
 <% if current_user.teams.include? @team %>
   <div class="page-header">
-<<<<<<< HEAD
-    <h1><%= @team.name.titleize %> within <%= link_to @team.club.name, @team.club %> <br />
-=======
     <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %>
     <% if @team.leaders.include? current_user %>
       <a data-toggle="modal" data-target="#team-manage-modal"><span class="glyphicon glyphicon-wrench wrench"></span></a>
     <% end %>
     <br />
->>>>>>> master
     <small><%= @team.description %></small></h1>
   </div>
   <div class="row">
