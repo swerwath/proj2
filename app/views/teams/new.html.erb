@@ -7,7 +7,7 @@
         <%= simple_form_for @team do |t| %>
           <%= t.hidden_field :club_id, value: @club_id %>
           <%= t.input :name, label: 'Team Name' %>
-          <%= t.input :description, placeholder: "Describe your team", as: :text, input_html: {rows: 8}, label: false %>
+          <%= t.input :description, placeholder: "Describe your team", as: :text, input_html: {rows: 7}, label: false %>
           <%= t.input :closed, label: 'Closed', value: false %>
           <%= t.button :submit %>
         <% end %>

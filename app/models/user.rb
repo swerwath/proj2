@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :presidentships, :through => :club_presidents, :source => :club
 
   has_and_belongs_to_many :teams
+  has_many :equipment
   has_many :comments
   has_many :announcements
 

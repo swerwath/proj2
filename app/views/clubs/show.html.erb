@@ -2,7 +2,11 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="page-header">
-        <h1><%= @club.name %><br />
+        <h1><%= @club.name %>
+        <% if @club.officers.include? current_user %>
+          <a data-toggle="modal" data-target="#club-manage-modal"><span class="glyphicon glyphicon-wrench wrench"></span></a>
+        <% end %>
+        <br />
         <small><%= @club.description %></small></h1>
       </div>
     </div>
@@ -30,4 +34,22 @@
     <% end %>
   </div>
 
+<% end %>
+
+<% if @club.officers.include? current_user %>
+  <!-- Modal for team management -->
+  <div id="club-manage-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Managing <%= @club.name%></h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'layouts/club_management' %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

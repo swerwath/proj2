@@ -1,0 +1,105 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingZero">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+          Club Info
+        </a>
+      </h4>
+    </div>
+    <div id="collapseZero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZero">
+      <div class="panel-body">
+        <%= simple_form_for(@club, url: club_path, method: 'patch') do |f| %>
+          <%= f.input :name, placeholder: "Name", label: false %>
+          <%= f.input :description, placeholder: "Description", as: :text, input_html: {rows: 7}, label: false %>
+          <%= f.button :submit, "Update" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Teams
+        </a>
+    </h4>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+    <div class="panel-body">
+      <ul class="list-group">
+        <% @club.teams.each do |t| %>
+          <%= render t %>
+        <% end %>
+      </ul>
+      <%= simple_form_for(@team, html: {class: 'form-inline' }) do |f| %>
+        <%= f.hidden_field :club_id, value: @club.id %>
+        <%= f.input :name, placeholder: 'Name', label: false %>
+        <%= f.input :description, placeholder: 'Description', label: false %>
+        <%= f.button :submit, "Create New Team" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingTwo">
+    <h4 class="panel-title">
+      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Club Members
+      </a>
+    </h4>
+  </div>
+  <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+    <div class="panel-body">
+      <ul class="list-group">
+        <% @club.members.each do |u| %>
+          <li class="list-group-item">
+            <%= u.name %>
+            <% unless @club.officers.include? u %>
+              <span class="pull-right">
+                <%= button_to "Remove", remove_user_club_path(club_id: @club.id, user_id: u.id), :class => "btn btn-danger btn-xs", :method => :patch %>
+              </span>
+              <span class="pull-right">
+                <%= button_to "Promote", promote_user_club_path(club_id: @club.id, user_id: u.id), :class => "btn btn-success btn-xs", :method => :patch %>
+              </span>
+            <% end %>
+            <% if @club.officers.include? u %>
+              <% if @club.presidents.include? current_user and u != current_user %>
+                <span class="pull-right">
+                  <%= button_to "Demote", demote_user_club_path(club_id: @club.id, user_id: u.id), :class => "btn btn-warning btn-xs", :method => :patch %>
+                </span>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<% if @club.presidents.include? current_user %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Transfer Presidency
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @club.officers.each do |u| %>
+            <% unless u == current_user %>
+              <li class="list-group-item">
+                <%= u.name %>
+                <span class="pull-right">
+                  <%= button_to "Transfer", transfer_presidency_path(club_id: @club.id, user_id: u.id), :class => "btn btn-danger btn-xs", :method => :patch %>
+                </span>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
