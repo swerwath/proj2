@@ -1,22 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Proj2" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Proj2" %>">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <header>
-    </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <div class="index-wrapper">
-         <%= render 'layouts/navigation/sidebar' %>
-         <%= yield %>
-       </div>
-    </main>
-  </body>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Proj2" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Proj2" %>">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header>
+  </header>
+  <div class="top-bar">
+    <span id="title-bar-text">Yolo</span>
+  </div>
+  <div class="wrapper" id="wrapper">
+    <div class="main-content">
+      <div id="sidebar-wrapper">
+        <%= render 'layouts/navigation/sidebar' %>
+      </div>
+      <div id="page-content-wrapper">
+        <main role="main">
+         <%= render 'layouts/messages' %>
+         <div class="index-wrapper">
+           <%= yield %>
+         </div>
+       </main>
+     </div>
+   </div>
+ </div>
+
+ <script>
+    var clicked = true;
+    $("#title-bar-text").click(function(e) {
+        clicked = !clicked;
+        if (clicked) {
+          $("#wrapper").removeClass("toggled");
+        } else {
+          $("#wrapper").addClass("toggled");
+        }
+    });
+    $("#title-bar-text").hover(
+      function(e) {
+        e.preventDefault();
+        $("#wrapper").removeClass("toggled");
+      }, 
+      function(e) {
+        if (!clicked) {
+          $("#wrapper").addClass("toggled");
+        }
+      }
+    );
+    $("#sidebar-wrapper").hover(
+      function(e) {
+        e.preventDefault();
+        $("#wrapper").removeClass("toggled");
+      },
+      function(e) {
+        if (!clicked) {
+          $("#wrapper").addClass("toggled");
+        }
+      }
+    );
+    </script>
+
+</body>
+
+
+
 </html>

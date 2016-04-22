@@ -1,10 +1,14 @@
 <% if current_user.teams.include? @team %>
   <div class="page-header">
+<<<<<<< HEAD
+    <h1><%= @team.name.titleize %> within <%= link_to @team.club.name, @team.club %> <br />
+=======
     <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %>
     <% if @team.leaders.include? current_user %>
       <a data-toggle="modal" data-target="#team-manage-modal"><span class="glyphicon glyphicon-wrench wrench"></span></a>
     <% end %>
     <br />
+>>>>>>> master
     <small><%= @team.description %></small></h1>
   </div>
   <div class="row">
@@ -66,7 +70,7 @@
   <% end %>
 <% else %>
 <div class="jumbotron">
-  <h1>You're not in <%= link_to @team.club.name, @team.club %>.<%= @team.name %>!</h1>
+  <h1>You're not in <%= @team.name.titleize %> within <%= link_to @team.club.name, @team.club %>!</h1>
   <% if @team.closed %>
     <% if TeamJoinRequest.where(user_id: current_user.id, team_id: @team.id).size == 0 %>
       <p>The team leader has chosen to make it private, but you're free to request access</p>
