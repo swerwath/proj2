@@ -7,39 +7,42 @@
     <br />
     <small><%= @team.description %></small></h1>
   </div>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Equipment</h3>
-        </div>
-        <div class="panel-body">
-          <table class="table table-striped">
-            <thead>
-              <th>Name</th>
-              <th>Condition</th>
-              <th>Owner</th>
-            </thead>
-            <tbody>
-              <% @team.equipment.each do |e| %>
-                <tr>
-                  <td><%= e.name %></td>
-                  <td><%= e.condition %></td>
-                  <% if e.checked_out? and not e.user == current_user %>
-                    <td><%= e.user.name %></td>
-                  <% elsif e.user == current_user %>
-                    <td><%= button_to "Return", equipment_return_path(id = e.id), :class => "btn btn-primary btn-xs", :method => :patch %></td>
-                  <% else %>
-                    <td><%= button_to "Check Out", equipment_checkout_path(id = e.id), :class => "btn btn-success btn-xs", :method => :patch %></td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+  <% if @has_equipment %>
+    <!-- Equipment -->
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Equipment</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped">
+              <thead>
+                <th>Name</th>
+                <th>Condition</th>
+                <th>Owner</th>
+              </thead>
+              <tbody>
+                <% @team.equipment.each do |e| %>
+                  <tr>
+                    <td><%= e.name %></td>
+                    <td><%= e.condition %></td>
+                    <% if e.checked_out? and not e.user == current_user %>
+                      <td><%= e.user.name %></td>
+                    <% elsif e.user == current_user %>
+                      <td><%= button_to "Return", equipment_return_path(id = e.id), :class => "btn btn-primary btn-xs", :method => :patch %></td>
+                    <% else %>
+                      <td><%= button_to "Check Out", equipment_checkout_path(id = e.id), :class => "btn btn-success btn-xs", :method => :patch %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
   <% if @team.leaders.include? current_user or (@team.name == "general" and @team.club.officers.include? current_user) %>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
