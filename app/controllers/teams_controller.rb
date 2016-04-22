@@ -72,6 +72,7 @@ class TeamsController < ApplicationController
       current_user.teams.append(@team)
       announce_title = current_user.name+" has joined "+@team.club.name+"."+@team.name
       join_announcement = Announcement.create team_id: @team.id, user_id: current_user.id, email_blast: false, title: announce_title
+      join_announcement.email
     end
     redirect_to "/teams/#{@team.id}"
   end
