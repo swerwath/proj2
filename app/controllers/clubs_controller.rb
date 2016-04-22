@@ -52,6 +52,12 @@ class ClubsController < ApplicationController
     if @club.officers.include? current_user
       @user = User.find(params[:user_id])
       @club.officers.remove @user
+      @user.teams.each do |t|
+        if t.club == self
+          t.users.remove @user
+          t.leaders.remove @user
+        end
+      end
     end
     redirect_to session.delete(:return_to)
   end
