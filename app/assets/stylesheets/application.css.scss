@@ -279,7 +279,6 @@
   position: absolute;
   width: 100%;
   top: 45px;
-  overflow: scroll;
 }
 
 @media(min-width:768px) {
@@ -320,4 +319,8 @@
 
 .wrench:hover {
   opacity: 1;
+}
+
+body {
+  background-color: #eee;
 }
