@@ -45,7 +45,7 @@ class ClubsController < ApplicationController
 
       join_announcement = Announcement.create(team_id: general_team.id, user_id: current_user.id, title: announce_title)
 
-      join_announcement.email
+      # join_announcement.email(join_announcement)
 
       redirect_to "/clubs/#{club.id}"
     else
@@ -54,18 +54,20 @@ class ClubsController < ApplicationController
   end
 
   def addToGeneralMailingList(club)
-    RestClient.post("https://api:key-67de9679b4feb46d01e6f5cbc08f4b65" \
+      hello = RestClient.post("https://api:key-67de9679b4feb46d01e6f5cbc08f4b65" \
                 "@api.mailgun.net/v3/lists/#{club.name}.general@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org/members",
                 :subscribed => true,
                 :address => current_user.email,
-                :name => current_user.name,)
+                :name => current_user.name)
+      puts hello
   end
 
   def create_club_mailing_list(clubName)
-      RestClient.post("https://api:key-67de9679b4feb46d01e6f5cbc08f4b65" \
+      response = RestClient.post("https://api:key-67de9679b4feb46d01e6f5cbc08f4b65" \
                   "@api.mailgun.net/v3/lists",
                   :address => "#{clubName}.general@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org",
                   :description => "General Mailing List for #{clubName}")
+      puts response
   end
 
 

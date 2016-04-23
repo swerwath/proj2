@@ -1,27 +1,23 @@
 class AnnouncementsController < ApplicationController
   def create
     session[:return_to] = request.referer
-    console.log("I am being called from Announcements")
     @a = Announcement.new user_id: current_user.id, team_id: params[:announcement][:team_id],
                             title: params[:announcement][:title], content: params[:announcement][:content],
                             email_blast: params[:announcement][:email_blast]
-  #  <script>
-  #  console.log("I am being called from AppController")
-  #  </script>
-    # @a.email
-    # if @a.save
-      # if @a.email_blast
-  #   mg_client1 = Mailgun::Client.new "key-67de9679b4feb46d01e6f5cbc08f4b65"
-  #   message_params =  { :from => 'postmaster@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org',
-  #                       :to => 'tom888cheng@gmail.com',
-  #                       :subject => 'Created.',
-  #                       :text => 'adfadfafafas'}
-  #  mg_client1.send_message("sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org", message_params)
-    # end
-    # else
-    #   flash[:error] = @a.errors.full_messages.to_sentence
-    # end
-    # redirect_to session.delete(:return_to)
+    if @a.save
+      if @a.email_blast
+        # RestClient.post "https://api:key-67de9679b4feb46d01e6f5cbc08f4b65"\
+        # "@api.mailgun.net/v3/sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org/messages",
+        # :from => "postmaster@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org",
+        # :to => "#{@a.team.club}.#{@a.team}@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org, postmaster@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org",
+        # :subject => @a.title,
+        # :text => @a.content
+        @a.email
+      end
+    else
+      flash[:error] = @a.errors.full_messages.to_sentence
+    end
+    redirect_to session.delete(:return_to)
   end
 
   def destroy
