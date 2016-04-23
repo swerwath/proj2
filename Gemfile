@@ -39,7 +39,7 @@ gem 'mailchimp-api', require: 'mailchimp'
 gem 'rails_12factor', group: :production
 
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 
 
 # Use ActiveModel has_secure_password

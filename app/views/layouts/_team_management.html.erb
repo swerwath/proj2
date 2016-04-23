@@ -9,13 +9,14 @@
     </div>
     <div id="collapseZero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZero">
       <div class="panel-body">
-        <%= simple_form_for(@team, url: team_path, method: 'patch') do |f| %>
+        <%= simple_form_for(@team, url: team_path, multipart: true, method: 'patch') do |f| %>
           <% if @team.name == "general" %>
             <%= f.input :name, disabled: true, placeholder: "Name", label: false %>
           <% else %>
             <%= f.input :name, placeholder: "Name", label: false %>
           <% end %>
-          <%= f.input :description, placeholder: "description", as: :text, input_html: {rows: 7}, label: false %>
+          <%= f.input :description, as: :text %>
+          <%= f.input :avatar, as: :file %>
           <%= f.button :submit, "Update" %>
         <% end %>
       </div>

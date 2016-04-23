@@ -10,6 +10,12 @@
       <% end %>
     </div>
     <fieldset>
+      <div class="form-group">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar %>
+      </div>
+    </fieldset>
+    <fieldset>
       <p>Leave these fields blank if you don't want to change your password.</p>
       <div class="form-group">
         <%= f.label :password %>
