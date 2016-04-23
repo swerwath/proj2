@@ -18,6 +18,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @has_equipment = !@team.equipment.empty?
 
     # We can't join the team without first being in the club
     if !current_user.clubs.include? @team.club
