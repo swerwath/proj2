@@ -8,6 +8,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
   <header>
   </header>
@@ -31,40 +32,39 @@
  </div>
 
  <script>
-    var clicked = true;
-    $("#title-bar-text").click(function(e) {
-        clicked = !clicked;
-        if (clicked) {
-          $("#wrapper").removeClass("toggled");
-        } else {
-          $("#wrapper").addClass("toggled");
-        }
-    });
-    $("#title-bar-text").hover(
-      function(e) {
-        e.preventDefault();
-        $("#wrapper").removeClass("toggled");
-      }, 
-      function(e) {
-        if (!clicked) {
-          $("#wrapper").addClass("toggled");
-        }
-      }
-    );
-    $("#sidebar-wrapper").hover(
-      function(e) {
-        e.preventDefault();
-        $("#wrapper").removeClass("toggled");
-      },
-      function(e) {
-        if (!clicked) {
-          $("#wrapper").addClass("toggled");
-        }
-      }
-    );
-    </script>
+ var clicked = true;
+ $("#title-bar-text").click(function(e) {
+  clicked = !clicked;
+  if (clicked) {
+    $("#wrapper").removeClass("toggled");
+  } else {
+    $("#wrapper").addClass("toggled");
+  }
+});
+ $("#title-bar-text").hover(
+  function(e) {
+    e.preventDefault();
+    $("#wrapper").removeClass("toggled");
+  }, 
+  function(e) {
+    if (!clicked) {
+      $("#wrapper").addClass("toggled");
+    }
+  }
+  );
+ $("#sidebar-wrapper").hover(
+  function(e) {
+    e.preventDefault();
+    $("#wrapper").removeClass("toggled");
+  },
+  function(e) {
+    if (!clicked) {
+      $("#wrapper").addClass("toggled");
+    }
+  }
+  );
+ </script>
 
-</body>
 
 
 
