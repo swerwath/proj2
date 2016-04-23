@@ -17,9 +17,11 @@
   </div>
   <div class="wrapper" id="wrapper">
     <div class="main-content">
+      <% if user_signed_in? %>
       <div id="sidebar-wrapper">
         <%= render 'layouts/navigation/sidebar' %>
       </div>
+      <% end %>
       <div id="page-content-wrapper">
         <main role="main">
          <%= render 'layouts/messages' %>
@@ -66,4 +68,4 @@
 
 
 
-</html>
+ </html>
