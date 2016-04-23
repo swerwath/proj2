@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     @announcement = Announcement.new
   end
 
+
   protected
 
   def configure_permitted_parameters
