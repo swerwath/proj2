@@ -8,6 +8,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
   <header>
   </header>
@@ -16,9 +17,11 @@
   </div>
   <div class="wrapper" id="wrapper">
     <div class="main-content">
+      <% if user_signed_in? %>
       <div id="sidebar-wrapper">
         <%= render 'layouts/navigation/sidebar' %>
       </div>
+      <% end %>
       <div id="page-content-wrapper">
         <main role="main">
          <%= render 'layouts/messages' %>
@@ -31,41 +34,40 @@
  </div>
 
  <script>
-    var clicked = true;
-    $("#title-bar-text").click(function(e) {
-        clicked = !clicked;
-        if (clicked) {
-          $("#wrapper").removeClass("toggled");
-        } else {
-          $("#wrapper").addClass("toggled");
-        }
-    });
-    $("#title-bar-text").hover(
-      function(e) {
-        e.preventDefault();
-        $("#wrapper").removeClass("toggled");
-      }, 
-      function(e) {
-        if (!clicked) {
-          $("#wrapper").addClass("toggled");
-        }
-      }
-    );
-    $("#sidebar-wrapper").hover(
-      function(e) {
-        e.preventDefault();
-        $("#wrapper").removeClass("toggled");
-      },
-      function(e) {
-        if (!clicked) {
-          $("#wrapper").addClass("toggled");
-        }
-      }
-    );
-    </script>
-
-</body>
+ var clicked = true;
+ $("#title-bar-text").click(function(e) {
+  clicked = !clicked;
+  if (clicked) {
+    $("#wrapper").removeClass("toggled");
+  } else {
+    $("#wrapper").addClass("toggled");
+  }
+});
+ $("#title-bar-text").hover(
+  function(e) {
+    e.preventDefault();
+    $("#wrapper").removeClass("toggled");
+  }, 
+  function(e) {
+    if (!clicked) {
+      $("#wrapper").addClass("toggled");
+    }
+  }
+  );
+ $("#sidebar-wrapper").hover(
+  function(e) {
+    e.preventDefault();
+    $("#wrapper").removeClass("toggled");
+  },
+  function(e) {
+    if (!clicked) {
+      $("#wrapper").addClass("toggled");
+    }
+  }
+  );
+ </script>
 
 
 
-</html>
+
+ </html>
