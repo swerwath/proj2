@@ -52,7 +52,6 @@
 
 /* Profile container */
 .profile {
-  margin-left: -250px;
     left: 250px;
     width: 250px;
     background: #CCC;
@@ -109,7 +108,7 @@
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 600;
-  padding: 6px 15px;
+  padding: 6px;
   margin-right: 5px;
 }
 
@@ -261,7 +260,7 @@
   height: 45px;
   position: fixed;
   z-index: 1;
-  background-color: #FFF;
+  background-color: rgba(#fff, 0);
 }
 
 .top-bar > .top-bar a:hover {
@@ -280,7 +279,6 @@
   position: absolute;
   width: 100%;
   top: 45px;
-  overflow: scroll;
 }
 
 @media(min-width:768px) {
@@ -321,4 +319,8 @@
 
 .wrench:hover {
   opacity: 1;
+}
+
+body {
+  background-color: #eee;
 }

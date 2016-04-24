@@ -12,9 +12,11 @@
 <body>
   <header>
   </header>
+  <% if user_signed_in? %>
   <div class="top-bar">
     <span id="title-bar-text">Yolo</span>
   </div>
+  <% end %>
   <div class="wrapper" id="wrapper">
     <div class="main-content">
       <% if user_signed_in? %>
@@ -25,16 +27,14 @@
       <div id="page-content-wrapper">
         <main role="main">
          <%= render 'layouts/messages' %>
-         <div class="index-wrapper">
            <%= yield %>
-         </div>
        </main>
      </div>
    </div>
  </div>
 
  <script>
- var clicked = true;
+ var clicked = false;
  $("#title-bar-text").click(function(e) {
   clicked = !clicked;
   if (clicked) {
@@ -47,7 +47,7 @@
   function(e) {
     e.preventDefault();
     $("#wrapper").removeClass("toggled");
-  }, 
+  },
   function(e) {
     if (!clicked) {
       $("#wrapper").addClass("toggled");

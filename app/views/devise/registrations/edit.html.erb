@@ -10,6 +10,12 @@
       <% end %>
     </div>
     <fieldset>
+      <div class="form-group">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar %>
+      </div>
+    </fieldset>
+    <fieldset>
       <p>Leave these fields blank if you don't want to change your password.</p>
       <div class="form-group">
         <%= f.label :password %>
@@ -33,13 +39,15 @@
 
 <div class="authform">
   <h3>Leave Teams</h3>
-  <% teams = current_user.teams.sort_by do |t| %>
-    <% t.club.name %>
-  <% end %>
-  <% teams.each do |t| %>
-    <% tname = "#{t.club.name}.#{t.name}"%>
-    <%= button_to "Leave #{tname}" %>
-  <% end %>
+  <div class="form-group">
+    <% teams = current_user.teams.sort_by do |t| %>
+      <% t.club.name %>
+    <% end %>
+    <% teams.each do |t| %>
+      <% tname = "#{t.club.name}.#{t.name}"%>
+      <%= button_to "Leave #{tname}" %>
+    <% end %>
+  </div>
 </div>
 
 <div class="authform">

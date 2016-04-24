@@ -38,6 +38,15 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => 'railsproj2',
+      :access_key_id => 'AKIAJLT5GCESQCUDTXGQ',
+      :secret_access_key => '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'
+    }
+  }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
