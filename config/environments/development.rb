@@ -42,8 +42,6 @@ Rails.application.configure do
     :storage => :s3,
     :s3_credentials => {
       :bucket => 'railsproj2',
-      :access_key_id => 'AKIAJLT5GCESQCUDTXGQ',
-      :secret_access_key => '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'
     }
   }
 
