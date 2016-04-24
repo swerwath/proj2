@@ -1,97 +1,98 @@
-<% if current_user.teams.include? @team %>
-  <%= render 'team_header' %>
-  <% if @has_equipment %>
-    <!-- Equipment -->
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Equipment</h3>
-          </div>
-          <div class="panel-body">
-            <table class="table table-striped">
-              <thead>
-                <th>Name</th>
-                <th>Condition</th>
-                <th>Owner</th>
-              </thead>
-              <tbody>
-                <% @team.equipment.each do |e| %>
-                  <tr>
-                    <td><%= e.name %></td>
-                    <td><%= e.condition %></td>
-                    <% if e.checked_out? and not e.user == current_user %>
-                      <td><%= e.user.name %></td>
-                    <% elsif e.user == current_user %>
-                      <td><%= button_to "Return", equipment_return_path(id = e.id), :class => "btn btn-primary btn-xs", :method => :patch %></td>
-                    <% else %>
-                      <td><%= button_to "Check Out", equipment_checkout_path(id = e.id), :class => "btn btn-success btn-xs", :method => :patch %></td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <% if @team.leaders.include? current_user or (@team.name == "general" and @team.club.officers.include? current_user) %>
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
-          <%= simple_form_for(@announcement, url: announcements_path, method: 'post') do |f| %>
-            <%= f.hidden_field :team_id, value: @team.id %>
+  <%= stylesheet_link_tag params[:controller] %>
+  <% if current_user.teams.include? @team %>
+    <%= render 'team_header' %>
+    <% if @has_equipment %>
+      <!-- Equipment -->
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Equipment</h3>
+            </div>
             <div class="panel-body">
-              <%= f.input :title, placeholder: "Announcement Title", label: false %>
-              <%= f.input :content, placeholder: "Write an announcement (in Markdown!)...", as: :text, input_html: {rows: 8}, label: false %>
-              <%= f.input :email_blast, label: 'Send out email?', value: false %>
+              <table class="table table-striped">
+                <thead>
+                  <th>Name</th>
+                  <th>Condition</th>
+                  <th>Owner</th>
+                </thead>
+                <tbody>
+                  <% @team.equipment.each do |e| %>
+                    <tr>
+                      <td><%= e.name %></td>
+                      <td><%= e.condition %></td>
+                      <% if e.checked_out? and not e.user == current_user %>
+                        <td><%= e.user.name %></td>
+                      <% elsif e.user == current_user %>
+                        <td><%= button_to "Return", equipment_return_path(id = e.id), :class => "btn btn-primary btn-xs", :method => :patch %></td>
+                      <% else %>
+                        <td><%= button_to "Check Out", equipment_checkout_path(id = e.id), :class => "btn btn-success btn-xs", :method => :patch %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
             </div>
-            <div class="panel-footer">
-              <%= f.button :submit, "Announce" %>
-            </div>
-          <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-  <% @team.feed.each do |a| %>
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3"><%= render a %></div>
-    </div>
-  <% end %>
-<% else %>
-<div class="jumbotron">
-  <h1>You're not in <%= @team.name.titleize %> within <%= link_to @team.club.name, @team.club %>!</h1>
-  <% if @team.closed %>
-    <% if TeamJoinRequest.where(user_id: current_user.id, team_id: @team.id).size == 0 %>
-      <p>The team leader has chosen to make it private, but you're free to request access</p>
-      <p><%= button_to "Request Access", request_to_join_path(id: @team.id), :class => "btn btn-lg btn-primary", :method => :patch %></p>
-    <% else %>
-      <p>Having second thoughts? Retract your join request at any time</p>
-      <p><%= button_to "Retract Request", retract_request_path(id: TeamJoinRequest.where(team_id: @team.id, user_id: current_user).first.id), :class => "btn btn-lg btn-warning", :method => :patch %></p>
+    <% end %>
+    <% if @team.leaders.include? current_user or (@team.name == "general" and @team.club.officers.include? current_user) %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-default">
+            <%= simple_form_for(@announcement, url: announcements_path, method: 'post') do |f| %>
+              <%= f.hidden_field :team_id, value: @team.id %>
+              <div class="panel-body">
+                <%= f.input :title, placeholder: "Announcement Title", label: false %>
+                <%= f.input :content, placeholder: "Write an announcement (in Markdown!)...", as: :text, input_html: {rows: 8}, label: false %>
+                <%= f.input :email_blast, label: 'Send out email?', value: false %>
+              </div>
+              <div class="panel-footer">
+                <%= f.button :submit, "Announce" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% @team.feed.each do |a| %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3"><%= render a %></div>
+      </div>
     <% end %>
   <% else %>
-    <p>Luckily for you, it's open.</p>
-    <p><%= button_to "Join "+@team.name, join_team_path(id: @team), :class => "btn btn-lg btn-success", :method => :patch %></p>
+  <div class="jumbotron">
+    <h1>You're not in <%= @team.name.titleize %> within <%= link_to @team.club.name, @team.club %>!</h1>
+    <% if @team.closed %>
+      <% if TeamJoinRequest.where(user_id: current_user.id, team_id: @team.id).size == 0 %>
+        <p>The team leader has chosen to make it private, but you're free to request access</p>
+        <p><%= button_to "Request Access", request_to_join_path(id: @team.id), :class => "btn btn-lg btn-primary", :method => :patch %></p>
+      <% else %>
+        <p>Having second thoughts? Retract your join request at any time</p>
+        <p><%= button_to "Retract Request", retract_request_path(id: TeamJoinRequest.where(team_id: @team.id, user_id: current_user).first.id), :class => "btn btn-lg btn-warning", :method => :patch %></p>
+      <% end %>
+    <% else %>
+      <p>Luckily for you, it's open.</p>
+      <p><%= button_to "Join "+@team.name, join_team_path(id: @team), :class => "btn btn-lg btn-success", :method => :patch %></p>
+    <% end %>
+  </div>
   <% end %>
-</div>
-<% end %>
 
-<% if @team.leaders.include? current_user %>
-  <!-- Modal for team management -->
-  <div id="team-manage-modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Managing <%= @team.club.name%>.<%= @team.name %></h4>
-        </div>
-        <div class="modal-body">
-          <%= render 'layouts/team_management' %>
+  <% if @team.leaders.include? current_user %>
+    <!-- Modal for team management -->
+    <div id="team-manage-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Managing <%= @team.club.name%>.<%= @team.name %></h4>
+          </div>
+          <div class="modal-body">
+            <%= render 'layouts/team_management' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>

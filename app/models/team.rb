@@ -15,7 +15,12 @@ class Team < ActiveRecord::Base
     medium: '300x300>'
   }, default_url: 'http://s3.amazonaws.com/railsproj2/teams/avatars/default/tom.png'
 
+  has_attached_file :cover, styles: {
+    cov: '1000x450#',
+  }, default_url: 'http://s3.amazonaws.com/railsproj2/teams/covers/default/desert_paradise_hd1.png'
+
   validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+  validates_attachment :cover, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   def feed(start_index=0, end_index=self.announcements.size)
     return self.announcements.reverse[start_index...end_index]
