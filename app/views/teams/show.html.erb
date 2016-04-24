@@ -1,12 +1,5 @@
 <% if current_user.teams.include? @team %>
-  <div class="page-header">
-    <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %>
-    <% if @team.leaders.include? current_user %>
-      <a data-toggle="modal" data-target="#team-manage-modal"><span class="glyphicon glyphicon-wrench wrench"></span></a>
-    <% end %>
-    <br />
-    <small><%= @team.description %></small></h1>
-  </div>
+  <%= render 'team_header' %>
   <% if @has_equipment %>
     <!-- Equipment -->
     <div class="row">

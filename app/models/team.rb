@@ -13,7 +13,7 @@ class Team < ActiveRecord::Base
     thumb: '100x100>',
     square: '200x200#',
     medium: '300x300>'
-  }
+  }, default_url: 'http://s3.amazonaws.com/railsproj2/teams/avatars/default/tom.png'
 
   validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
