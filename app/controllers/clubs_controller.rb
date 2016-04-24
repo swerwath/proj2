@@ -46,6 +46,26 @@ class ClubsController < ApplicationController
     redirect_to session.delete(:return_to)
   end
 
+  def create
+    session[:return_to] = request.referer
+    @club = Club.new
+    @club.name = params[:club][:name]
+    @club.description = params[:club][:description]
+    @club.closed = params[:club][:closed]
+    @club.officers.append(current_user)
+    @club.presidents.append(current_user)
+    if @club.save
+      @genTeam = Team.new name: "general", description: "General Discussion", closed: false, club_id: @club.id
+      @genTeam.leaders.append(current_user)
+      @genTeam.users.append(current_user)
+      @genTeam.save
+      redirect_to @club
+    else
+      flash[:error] = @club.errors.full_messages.to_sentence
+      redirect_to session.delete(:return_to)
+    end
+  end
+
   def remove_user
     session[:return_to] = request.referer
     @club = Club.find(params[:club_id])
