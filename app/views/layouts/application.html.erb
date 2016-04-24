@@ -12,14 +12,18 @@
 <body>
   <header>
   </header>
+  <% if user_signed_in? %>
   <div class="top-bar">
     <span id="title-bar-text">Yolo</span>
   </div>
+  <% end %>
   <div class="wrapper" id="wrapper">
     <div class="main-content">
+      <% if user_signed_in? %>
       <div id="sidebar-wrapper">
         <%= render 'layouts/navigation/sidebar' %>
       </div>
+      <% end %>
       <div id="page-content-wrapper">
         <main role="main">
          <%= render 'layouts/messages' %>
@@ -30,7 +34,7 @@
  </div>
 
  <script>
- var clicked = true;
+ var clicked = false;
  $("#title-bar-text").click(function(e) {
   clicked = !clicked;
   if (clicked) {
@@ -66,4 +70,4 @@
 
 
 
-</html>
+ </html>
