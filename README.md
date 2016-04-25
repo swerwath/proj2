@@ -1,8 +1,8 @@
-Title: Whisp.io
+Title: Wisp.io
 Team Members: Isabel Zhang, Scott Werwath, Tom Cheng
-Demo Link: fill in
+Demo Link: http://wisp.herokuapp.com
 
-Idea: Whisp.io is a club management app that will make managing a club much simpler. The website allows users to make a club and within a club, different teams. Team leads will be able to make announcements to team members and have a working equipment list to see whether or not the equipment is checked-out. 
+Idea: Wisp.io is a club management app that will make managing a club much simpler. The website allows users to make a club and within a club, different teams. Team leads will be able to make announcements to team members and have a working equipment list to see whether or not the equipment is checked-out. 
 
 Models and Description:
 
@@ -72,7 +72,7 @@ Team leads can add additional equipment onto equipment list
 Users can change password, leave a team, and cancel their account
 
 Division of Labor:
-Isabel: JavaScript sidebar, mockups
+Isabel: JavaScript sidebar, mockups, frontend
 Scott: All the models and relations, bootstrap, team profile pictures and cover photos
 Tom: Mailgun API, mockups, video script and readme
 
