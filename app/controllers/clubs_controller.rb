@@ -18,7 +18,9 @@ class ClubsController < ApplicationController
         @genTeam.leaders.append(current_user)
         @genTeam.users.append(current_user)
         @genTeam.save
-        create_club_mailing_list(@club.name)
+
+        # create_club_mailing_list(@club.name)
+
         redirect_to @club
       else
         flash[:error] = @club.errors.full_messages.to_sentence
@@ -41,7 +43,7 @@ class ClubsController < ApplicationController
       current_user.teams.append(general_team)
       announce_title = current_user.name+" has joined "+club.name+".general"
 
-      addToGeneralMailingList(club)
+      # addToGeneralMailingList(club)
 
       join_announcement = Announcement.create(team_id: general_team.id, user_id: current_user.id, title: announce_title)
 
@@ -53,6 +55,7 @@ class ClubsController < ApplicationController
     end
   end
 
+  # Called from join, this function adds the current_user into the general mailing list for that club.
   def addToGeneralMailingList(club)
       hello = RestClient.post("https://api:key-67de9679b4feb46d01e6f5cbc08f4b65" \
                 "@api.mailgun.net/v3/lists/#{club.name}.general@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org/members",
@@ -62,6 +65,7 @@ class ClubsController < ApplicationController
       puts hello
   end
 
+  # Called from create, this function creates the club mailing list.
   def create_club_mailing_list(clubName)
       response = RestClient.post("https://api:key-67de9679b4feb46d01e6f5cbc08f4b65" \
                   "@api.mailgun.net/v3/lists",

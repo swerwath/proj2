@@ -6,12 +6,6 @@ class AnnouncementsController < ApplicationController
                             email_blast: params[:announcement][:email_blast]
     if @a.save
       if @a.email_blast
-        # RestClient.post "https://api:key-67de9679b4feb46d01e6f5cbc08f4b65"\
-        # "@api.mailgun.net/v3/sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org/messages",
-        # :from => "postmaster@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org",
-        # :to => "#{@a.team.club}.#{@a.team}@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org, postmaster@sandbox83dd2cfc457e45fdbb7126e6893b8656.mailgun.org",
-        # :subject => @a.title,
-        # :text => @a.content
         @a.email
       end
     else
