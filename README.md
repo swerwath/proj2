@@ -2,7 +2,7 @@
 ## Isabel Zhang, Scott Werwath, Tom Cheng
 
 ### Concept
-Wisp is a club management app that will make managing a club much simpler. The website allows users to make a club and within a club, different teams. Team leads will be able to make announcements to team members and have a working equipment list to see whether or not the equipment is checked-out. 
+Wisp is a club management app that will make managing a club much simpler. The website allows users to make a club and within a club, different teams. Team leads will be able to make announcements to team members and have a working equipment list to see whether or not the equipment is checked-out. Watch the demo [here](https://www.youtube.com/watch?v=iQdunC-BqB8)
 
 ### Models and Description:
 
