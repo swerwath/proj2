@@ -5,6 +5,7 @@
   <title><%= content_for?(:title) ? yield(:title) : "Proj2" %></title>
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Proj2" %>">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag params[:controller] %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -14,7 +15,7 @@
   </header>
   <% if user_signed_in? %>
   <div class="top-bar">
-    <span id="title-bar-text">Yolo</span>
+    <span id="title-bar-text">Wisp</span>
   </div>
   <% end %>
   <div class="wrapper" id="wrapper">
