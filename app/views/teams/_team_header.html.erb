@@ -1,0 +1,25 @@
+<style media="screen">
+  .team-header { background-image: url("<%= @team.cover.url(:cov) %>"); }
+</style>
+
+<div class="team-header">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <img src="<%= @team.avatar.url(:square) %>" class="img-thumbnail img-responsive center-block prof-pic" alt="Cinque Terre">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1><%= link_to @team.club.name, @team.club %>.<%= @team.name %>
+    <% if @team.leaders.include? current_user %>
+      <a data-toggle="modal" data-target="#team-manage-modal"><span class="glyphicon glyphicon-wrench wrench"></span></a>
+    <% end %>
+    <br />
+    <small><%= @team.description %></small></h1>
+  </div>
+</div>

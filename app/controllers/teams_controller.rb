@@ -33,7 +33,8 @@ class TeamsController < ApplicationController
     if @team.leaders.include? current_user
       @team.name = @team_params[:name]
       @team.description = @team_params[:description]
-
+      @team.avatar = @team_params[:avatar]
+      @team.cover = @team_params[:cover]
       unless @team.save
         flash[:error] = @team.errors.full_messages.to_sentence
       end
