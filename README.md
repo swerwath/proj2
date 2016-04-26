@@ -1,5 +1,6 @@
 # Welcome to [Wisp](http://wisp.herokuapp.com), Silicon Valley's Hottest Startup
 ## Isabel Zhang, Scott Werwath, Tom Cheng
+## NOTE: Images currently don't work on our Heroku site, since our AWS account has hit its Free Usage limit and we don't like spending money
 
 ### Concept
 Wisp is a club management app that will make managing a club much simpler. The website allows users to make a club and within a club, different teams. Team leads will be able to make announcements to team members and have a working equipment list to see whether or not the equipment is checked-out. Watch the demo [here](https://www.youtube.com/watch?v=iQdunC-BqB8)
